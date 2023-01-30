@@ -8,6 +8,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ViewController : NSViewController
+@property (strong) IBOutlet NSButton *button;
 
 
 @end
