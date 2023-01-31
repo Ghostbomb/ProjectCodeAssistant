@@ -28,6 +28,7 @@ jobs:
           -scheme ProjectCodeAssistant \
           -configuration Release \
           -destination generic/platform=macOS \
+          -archivePath ./ \
           build
 
     - name: Release
