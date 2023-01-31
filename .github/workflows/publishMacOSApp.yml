@@ -28,6 +28,7 @@ jobs:
           next_version="0.0.1"
         else
           # Use semver to determine the next version
+          npx semver -i patch $latest_tag
           next_version=$(npx semver -i patch $latest_tag)
         fi
         
