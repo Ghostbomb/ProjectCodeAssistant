@@ -28,7 +28,7 @@ jobs:
           -scheme ProjectCodeAssistant \
           -configuration Release \
           -destination generic/platform=macOS \
-          -archivePath ./ \
+          -archivePath ${{ github.workspace }} \
           build
     - name: CheckPath
       run: ls -al * && ls -al ${{ github.workspace }}
