@@ -35,6 +35,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: v0.0.2test
+        token: ${{ secrets.PERSONAL_TOKEN }}
 
     - name: Publish release
       uses: actions/upload-release-asset@v1
