@@ -30,6 +30,8 @@ jobs:
           # Use semver to determine the next version
           next_version=$(npx semver -i patch $latest_tag)
         fi
+        
+        echo $next_version
 
         # Set the next version as an output
         echo "::set-output name=next_version::$next_version"
