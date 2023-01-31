@@ -30,7 +30,8 @@ jobs:
           -destination generic/platform=macOS \
           -archivePath ./ \
           build
-
+    - name: CheckPath
+      run: ls -al * && ls -al ${{ github.workspace }}
     - name: Release
       id: create_release
       uses: softprops/action-gh-release@v1
