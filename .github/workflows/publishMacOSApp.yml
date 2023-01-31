@@ -31,7 +31,10 @@ jobs:
           build
 
     - name: Release
+      id: create_release
       uses: softprops/action-gh-release@v1
+      with:
+        tag: v0.0.2test
 
     - name: Publish release
       uses: actions/upload-release-asset@v1
