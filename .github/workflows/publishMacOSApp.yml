@@ -26,7 +26,7 @@ jobs:
           -project ProjectCodeAssistant.xcodeproj \
           -scheme ProjectCodeAssistant \
           -configuration Release \
-          -destination generic/platform=OSX \
+          -destination generic/platform=macOS \
           build
 
     - name: Publish release
