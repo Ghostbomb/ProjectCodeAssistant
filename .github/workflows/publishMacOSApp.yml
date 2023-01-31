@@ -37,6 +37,7 @@ jobs:
       with:
         tag_name: v0.0.2test
         token: ${{ secrets.PERSONAL_TOKEN }}
+        files: ProjectCodeAssistant.app
 
     - name: Publish release
       uses: actions/upload-release-asset@v1
