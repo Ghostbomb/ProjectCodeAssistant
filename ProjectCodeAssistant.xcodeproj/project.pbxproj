@@ -12,6 +12,7 @@
 		3EEF9559298758C700F4DA0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EEF9558298758C700F4DA0D /* Assets.xcassets */; };
 		3EEF955C298758C700F4DA0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EEF955A298758C700F4DA0D /* Main.storyboard */; };
 		3EEF955E298758C700F4DA0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEF955D298758C700F4DA0D /* main.m */; };
+		3EEF95672988CEAD00F4DA0D /* ImageAndTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEF95662988CEAD00F4DA0D /* ImageAndTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,8 @@
 		3EEF955B298758C700F4DA0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EEF955D298758C700F4DA0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3EEF955F298758C700F4DA0D /* ProjectCodeAssistant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProjectCodeAssistant.entitlements; sourceTree = "<group>"; };
+		3EEF95652988CEAD00F4DA0D /* ImageAndTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAndTextView.h; sourceTree = "<group>"; };
+		3EEF95662988CEAD00F4DA0D /* ImageAndTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,8 @@
 		3EEF9551298758C600F4DA0D /* ProjectCodeAssistant */ = {
 			isa = PBXGroup;
 			children = (
+				3EEF95652988CEAD00F4DA0D /* ImageAndTextView.h */,
+				3EEF95662988CEAD00F4DA0D /* ImageAndTextView.m */,
 				3EEF9552298758C600F4DA0D /* AppDelegate.h */,
 				3EEF9553298758C600F4DA0D /* AppDelegate.m */,
 				3EEF9555298758C600F4DA0D /* ViewController.h */,
@@ -140,6 +145,7 @@
 				3EEF9557298758C600F4DA0D /* ViewController.m in Sources */,
 				3EEF955E298758C700F4DA0D /* main.m in Sources */,
 				3EEF9554298758C600F4DA0D /* AppDelegate.m in Sources */,
+				3EEF95672988CEAD00F4DA0D /* ImageAndTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
