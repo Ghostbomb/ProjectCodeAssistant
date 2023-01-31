@@ -34,7 +34,7 @@ jobs:
       run: xcodebuild archive -project "$PROJECT_NAME.xcodeproj" -scheme "$SCHEME_NAME" -archivePath "$PROJECT_NAME.xcarchive"
 
     - name: Export Archive
-      run: xcodebuild -exportArchive -archivePath "$PROJECT_NAME.xcarchive" -exportPath "$PROJECT_NAME.app" -exportOptionsPlist exportOptions.plist
+      run: xcodebuild -exportArchive -archivePath "$PROJECT_NAME.xcarchive" -exportPath "$PROJECT_NAME.app"
 
     - name: CheckPath
       run: ls -al * && ls -al ${{ github.workspace }}
