@@ -8,6 +8,12 @@ on:
       - main
       - githubActions
 
+env:
+  PROJECT_NAME: ProjectCodeAssistant
+  SCHEME_NAME: ProjectCodeAssistant
+  BUNDLE_ID: com.pavlohavrylyuk.ProjectCodeAssistant
+  APP_FILE_NAME: ProjectCodeAssistant.app
+  
 jobs:
   build-and-publish:
     runs-on: macOS-latest
@@ -20,16 +26,16 @@ jobs:
       uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
+        
+    - name: Build Xcode Project
+      run: xcodebuild clean build -project "$PROJECT_NAME.xcodeproj" -scheme "$SCHEME_NAME"
 
-    - name: Build project
-      run: |
-        xcodebuild \
-          -project ProjectCodeAssistant.xcodeproj \
-          -scheme ProjectCodeAssistant \
-          -configuration Release \
-          -destination generic/platform=macOS \
-          -archivePath ${{ github.workspace }} \
-          build
+    - name: Archive Xcode Project
+      run: xcodebuild archive -project "$PROJECT_NAME.xcodeproj" -scheme "$SCHEME_NAME" -archivePath "$PROJECT_NAME.xcarchive"
+
+    - name: Export Archive
+      run: xcodebuild -exportArchive -archivePath "$PROJECT_NAME.xcarchive" -exportPath "$PROJECT_NAME.app" -exportOptionsPlist exportOptions.plist
+
     - name: CheckPath
       run: ls -al * && ls -al ${{ github.workspace }}
     - name: Release
@@ -38,12 +44,12 @@ jobs:
       with:
         tag_name: v0.0.2test
         token: ${{ secrets.PERSONAL_TOKEN }}
-        files: ProjectCodeAssistant.app
+        files: "$PROJECT_NAME.app/$APP_FILE_NAME"
 
     - name: Publish release
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ProjectCodeAssistant.app
-        asset_name: ProjectCodeAssistant.app
+        asset_path: "$PROJECT_NAME.app/$APP_FILE_NAME"
+        asset_name: "$PROJECT_NAME-$SCHEME_NAME-$BUNDLE_ID.app"
         asset_content_type: application/octet-stream
