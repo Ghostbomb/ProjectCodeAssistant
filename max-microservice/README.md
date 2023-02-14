@@ -1,7 +1,12 @@
 # Microservice for Max
 
+
+
 This is a microservice for Max that allows you to send and receive messages from a text file `microservice_IO.txt` in 
 the same directory as the Python file
+
+## Usage
+`python3 microservice.py`
 
 ## Request Data
 **Trigger Word:** `run_microservice`
