@@ -30,9 +30,17 @@ def write_file(string):
         file.close()
 
 
+# Append string to file function
+def append_file(string):
+    with open(triggerFilePath, 'a') as file:
+        file.write(string)
+        file.close()
+
+
 # Microservice function
 def microservice():
-    write_file('Microservice is running...')
+    write_file("microservice_finished\n")
+    append_file('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor')
 
 
 def main():

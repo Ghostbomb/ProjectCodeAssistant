@@ -18,7 +18,7 @@ User->microservice_IO.txt:Writes "run_microservice" to file
 
 microservice_IO.txt->(1)microservice.py:Checks File/Detected Changes
 
-microservice.py->microservice_IO.txt: Clears file/Writes data
+microservice.py->microservice_IO.txt: Clears file/Writes data with "microservice_finished" at the top
 
 microservice_IO.txt-->(1)microservice.py:Checks File
 

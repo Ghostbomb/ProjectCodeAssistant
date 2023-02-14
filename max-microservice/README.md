@@ -12,6 +12,7 @@ This will run the microservice and run the code required for the microservice to
 ## Receive Data
 The microservice will send data to the text file `microservice_IO.txt`.
 The data will be stored in this file for any other script to read and handle accordingly.
+To signify the microservice has finished running, the text file will contain the string `microservice_finished`
 
 ## UML Sequence Diagram
 ![UML.png](images/UML.png)
