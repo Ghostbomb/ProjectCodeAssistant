@@ -1,0 +1,30 @@
+# Rendered in: https://sequencediagram.org/
+
+title UML Sequence Diagram for Max's Microservice
+
+participant User
+participant microservice_IO.txt
+participant microservice.py
+participant python.os
+
+
+microservice.py->python.os:Checks if file exists
+
+python.os-->microservice_IO.txt: If no file is found, create file
+
+microservice_IO.txt-->(1)microservice.py:Checks File
+
+User->microservice_IO.txt:Writes "run_microservice" to file
+
+microservice_IO.txt->(1)microservice.py:Checks File/Detected Changes
+
+microservice.py->microservice_IO.txt: Clears file/Writes data
+
+microservice_IO.txt-->(1)microservice.py:Checks File
+
+microservice_IO.txt->User:Reads data from file
+
+microservice_IO.txt-->(1)microservice.py:Checks File
+
+note over microservice_IO.txt,microservice.py:Continues to check the file every X seconds for keyword
+
