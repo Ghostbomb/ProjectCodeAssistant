@@ -3,6 +3,8 @@
 This is a microservice for Max that allows you to send and receive messages from a text file `microservice_IO.txt` in 
 the same directory as the Python file
 
+`python3 microservice.py`
+
 ## Request Data
 **Trigger Word:** `run_microservice`
 
@@ -13,6 +15,16 @@ This will run the microservice and run the code required for the microservice to
 The microservice will send data to the text file `microservice_IO.txt`.
 The data will be stored in this file for any other script to read and handle accordingly.
 To signify the microservice has finished running, the text file will contain the string `microservice_finished`
+
+## Example output
+````
+B
+C
+D
+E
+F
+microservice_finished
+````
 
 ## UML Sequence Diagram
 ![UML.png](images/UML.png)
