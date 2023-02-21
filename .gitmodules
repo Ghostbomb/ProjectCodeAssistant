@@ -1,0 +1,3 @@
+[submodule "ProjectCodeAssistant/CS_361-Microservice"]
+	path = ProjectCodeAssistant/CS_361-Microservice
+	url = https://github.com/goldstem/CS_361-Microservice
