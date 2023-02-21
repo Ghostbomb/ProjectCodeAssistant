@@ -5,6 +5,5 @@
 ## Steps to clone
 ```
 git clone https://github.com/goldstem/CS_361-Microservice.git
-
 git submodule update --init --recursive
 ```
