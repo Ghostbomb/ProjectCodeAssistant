@@ -11,6 +11,7 @@
 		3E615B7F29A70B47006472A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E615B7E29A70B47006472A1 /* main.m */; };
 		3E615B8029A70C70006472A1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6670DE29A7012400F64598 /* CFNetwork.framework */; };
 		3E615B8329A70C71006472A1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6670E029A7012D00F64598 /* SystemConfiguration.framework */; };
+		3E615B8C29A74208006472A1 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E615B8B29A74208006472A1 /* Globals.m */; };
 		3EEF9554298758C600F4DA0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEF9553298758C600F4DA0D /* AppDelegate.m */; };
 		3EEF9557298758C600F4DA0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEF9556298758C600F4DA0D /* ViewController.m */; };
 		3EEF9559298758C700F4DA0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EEF9558298758C700F4DA0D /* Assets.xcassets */; };
@@ -22,6 +23,8 @@
 		3E615B7929A703FE006472A1 /* SocketClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SocketClient.h; sourceTree = "<group>"; };
 		3E615B7A29A703FE006472A1 /* SocketClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SocketClient.m; sourceTree = "<group>"; };
 		3E615B7E29A70B47006472A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3E615B8A29A74208006472A1 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		3E615B8B29A74208006472A1 /* Globals.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 		3E6670DE29A7012400F64598 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3E6670E029A7012D00F64598 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3EEF954F298758C600F4DA0D /* ProjectCodeAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectCodeAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,14 +85,16 @@
 				3EEF95662988CEAD00F4DA0D /* ImageAndTextView.m */,
 				3EEF9553298758C600F4DA0D /* AppDelegate.m */,
 				3EEF9552298758C600F4DA0D /* AppDelegate.h */,
+				3EEF9556298758C600F4DA0D /* ViewController.m */,
 				3EEF9555298758C600F4DA0D /* ViewController.h */,
 				3E615B7929A703FE006472A1 /* SocketClient.h */,
 				3E615B7A29A703FE006472A1 /* SocketClient.m */,
-				3EEF9556298758C600F4DA0D /* ViewController.m */,
 				3EEF9558298758C700F4DA0D /* Assets.xcassets */,
 				3EEF955A298758C700F4DA0D /* Main.storyboard */,
 				3EEF955F298758C700F4DA0D /* ProjectCodeAssistant.entitlements */,
 				3E615B7E29A70B47006472A1 /* main.m */,
+				3E615B8A29A74208006472A1 /* Globals.h */,
+				3E615B8B29A74208006472A1 /* Globals.m */,
 			);
 			path = ProjectCodeAssistant;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				3E615B7B29A703FE006472A1 /* SocketClient.m in Sources */,
 				3EEF9554298758C600F4DA0D /* AppDelegate.m in Sources */,
 				3E615B7F29A70B47006472A1 /* main.m in Sources */,
+				3E615B8C29A74208006472A1 /* Globals.m in Sources */,
 				3EEF95672988CEAD00F4DA0D /* ImageAndTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

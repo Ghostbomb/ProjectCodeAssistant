@@ -10,12 +10,19 @@
 #import "SocketClient.h"
 
 
+NSDictionary *jsonData = @{
+    @"name": @"John Doe",
+    @"age": @30,
+    @"email": @"john.doe@example.com"
+};
+
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
     }
     SocketClient *socketClient = [[SocketClient alloc] init];
-        int socketDescriptor = [socketClient connectToServerWithIP:@"10.0.0.142" andPort:9876];
+        int socketDescriptor = [socketClient connectToServerWithIP:@"127.0.0.1" andPort:9876];
         NSLog(@"Socket descriptor: %d", socketDescriptor);
         if (socketDescriptor != -1) {
             NSString *message = @"Hello, server!";
@@ -41,6 +48,16 @@ int main(int argc, const char * argv[]) {
         else {
             NSLog(@"Failed to receive data");
         }
+        // Send JSON data to the socket server
+        NSData *jsonDataToSend = [NSJSONSerialization dataWithJSONObject:jsonData options:0 error:nil];
+        BOOL success = [socketClient sendData:jsonDataToSend onSocket:socketDescriptor];
+        if (success) {
+            NSLog(@"Sent JSON data successfully");
+        }
+        else {
+            NSLog(@"Failed to send JSON data");
+        }
+        
         
     
     return NSApplicationMain(argc, argv);
