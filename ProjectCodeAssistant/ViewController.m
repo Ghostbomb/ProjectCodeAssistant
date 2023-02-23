@@ -27,6 +27,17 @@
 //        [self.IDESelectorPopUpBox addItemWithObjectValue:item2];
 
     // Do any additional setup after loading the view.
+
+    #ifdef DEBUG_DEV
+        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        self.userProjectName.stringValue = [NSString stringWithFormat:@"TestProject %@", [dateFormatter stringFromDate:[NSDate date]]];
+        // have this be a folder in the user's home directory
+        self.FolderDirectoryField.stringValue = [NSString stringWithFormat:@"%@/Xcode_DEV/ProjectCodeAssistant/test/", NSHomeDirectory()];
+        // self.userBranchName.stringValue = @"main";
+        self.IDESelectorPopUpBox.stringValue = @"CLion";
+    #endif
+
 }
 
 - (IBAction)openFileBrowser:(id)sender {
@@ -128,8 +139,39 @@ static void connectToSocket(ViewController *object, SocketClient **socketClient,
     }
 }
 
+static void dataFilledOutCheck(ViewController *object) {
+    if ([object.userProjectName.stringValue isEqualToString:@""] ||
+        [object.userLocation.stringValue isEqualToString:@""] ||
+        [object.userBranchName.stringValue isEqualToString:@""] ||
+        [object.IDESelectorPopUpBox.stringValue isEqualToString:@""]
+        )
+    {
+        [object appendTextToTextField:@"Please fill out all fields"];
+        return;
+    }
+}
+
+
+static void runShellScript(const char *command) {
+    // Execute the command
+    NSLog(@"Executing commands: %s", command);
+    int result = system(command);
+    
+    // Check if the command executed successfully
+    if (result == 0) {
+        NSLog(@"Command executed successfully");
+    } else {
+        NSLog(@"Command failed with exit code %d", result);
+    }
+}
+
 - (IBAction)runCreateProject:(NSButton *)sender {
     [self clearLogTextField];
+        
+    // #ifndef DEBUG
+        dataFilledOutCheck(self);
+    // #endif
+    
     [self appendTextToTextField:@"Creating Project..."];
     // Connect
     SocketClient * socketClient;
@@ -145,6 +187,15 @@ static void connectToSocket(ViewController *object, SocketClient **socketClient,
     // Create a folder with the name of the project
     createFolder(self, userLocation, userName);
     
+
+    NSString *runCommand = [NSString stringWithFormat:@"cd \"%@\" && git init && ls -al", [[Globals sharedInstance] lastCreatedProject]];
+    // Execute the command
+    runShellScript([runCommand UTF8String]);
+    
+    
+    
+
+    return;
     // Send Data
     sendJSONData(self, jsonData, socketClient, socketDescriptor);
 }
