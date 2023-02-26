@@ -5,7 +5,7 @@ import time
 triggerFilePath = './microservice_IO.txt'
 triggerWord = "run_microservice"
 dataFilePath = './data.txt'
-numberOfLineToPrint = 5
+numberOfLineToPrint = 1
 
 
 # Random Number Generator from 1 to #
