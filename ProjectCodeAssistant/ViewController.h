@@ -19,11 +19,20 @@
 @property (strong) IBOutlet NSProgressIndicator *ProgressIndicator;
 
 @property (strong) IBOutlet NSTextField *LogTextField;
+- (IBAction)runCreateProject:(NSButton *)sender;
+@property (weak) IBOutlet NSTextField *userProjectName;
+@property (weak) IBOutlet NSButton *userPrivateGit;
+@property (weak) IBOutlet NSTextField *userBranchName;
+@property (weak) IBOutlet NSTextField *userLocation;
+@property (weak) IBOutlet NSButton *userPublishRepo;
+- (IBAction)userUndoButton:(NSButton *)sender;
 
 
 
 //Function Prototypes
 - (void)appendTextToTextField:(NSString *)text;
+- (void)clearLogTextField;
+
 
 @end
 

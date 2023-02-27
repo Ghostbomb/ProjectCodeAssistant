@@ -833,7 +833,7 @@
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tWA-zG-gg2">
                                 <rect key="frame" x="116" y="116" width="247" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="main" drawsBackground="YES" id="Z9F-sA-cYO">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="main" drawsBackground="YES" id="Z9F-sA-cYO">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -849,6 +849,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" textStyle="headline" name=".SFNS-Bold"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="runCreateProject:" target="XfG-lQ-9wD" id="SWO-JY-uuy"/>
+                                </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tch-RV-8b2">
                                 <rect key="frame" x="408" y="54" width="204" height="196"/>
@@ -884,6 +887,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="userUndoButton:" target="XfG-lQ-9wD" id="5pA-ZP-PL6"/>
+                                </connections>
                             </button>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E4G-bi-mVF">
                                 <rect key="frame" x="589" y="16" width="25" height="25"/>
@@ -926,6 +932,11 @@
                         <outlet property="ProgressIndicator" destination="Kro-No-fIh" id="Pci-0p-YXn"/>
                         <outlet property="button" destination="BSh-ni-zkX" id="4hd-1S-5Bm"/>
                         <outlet property="text" destination="tch-RV-8b2" id="Ewn-0Y-xJR"/>
+                        <outlet property="userBranchName" destination="tWA-zG-gg2" id="nEW-WS-lrQ"/>
+                        <outlet property="userLocation" destination="EVP-yd-q9v" id="wTE-Lr-SXj"/>
+                        <outlet property="userPrivateGit" destination="KCm-YC-a4P" id="tyo-fJ-Bvq"/>
+                        <outlet property="userProjectName" destination="vLv-Fk-f3f" id="Gx6-cE-eYh"/>
+                        <outlet property="userPublishRepo" destination="m2I-2I-V8J" id="T2a-kz-x7F"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
