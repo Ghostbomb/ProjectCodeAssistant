@@ -135,7 +135,13 @@ static void connectToSocket(ViewController *object, SocketClient **socketClient,
         [object appendTextToTextField:@"Failed to connect to Microservice"];
         //        return;
     }else{
-        [object appendTextToTextField:@"Connected to Microservice"];
+        // Wait to receive "Hello from server" from server before going on
+//        NSData *data = [*socketClient receiveDataOnSocket:*socketDescriptor];
+//        NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"Received data: %@", dataString);
+//        if(dataString != nil || [dataString isEqualToString:@"Hello from server"]){
+            [object appendTextToTextField:@"Connected to Microservice"];
+//        }
     }
 }
 
@@ -188,16 +194,22 @@ static void runShellScript(const char *command) {
     createFolder(self, userLocation, userName);
     
 
-    NSString *runCommand = [NSString stringWithFormat:@"cd \"%@\" && git init && ls -al", [[Globals sharedInstance] lastCreatedProject]];
+    NSString *runCommand = [NSString stringWithFormat:@"cd \"%@\" && git init --initial-branch=\"%@\"", [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
     // Execute the command
     runShellScript([runCommand UTF8String]);
     
-    
-    
-
-    return;
     // Send Data
     sendJSONData(self, jsonData, socketClient, socketDescriptor);
+
+    // Receive Data and set to "repoLink" variable and print to screen
+    NSData *data = [socketClient receiveDataOnSocket:socketDescriptor];
+    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"Received data: %@", dataString);
+    if(dataString != nil){
+        // print to screen
+
+    }
+
 }
 
 - (IBAction)userUndoButton:(NSButton *)sender {

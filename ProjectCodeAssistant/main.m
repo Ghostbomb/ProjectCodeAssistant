@@ -21,6 +21,7 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
     }
+    /*
     SocketClient *socketClient = [[SocketClient alloc] init];
         int socketDescriptor = [socketClient connectToServerWithIP:@"127.0.0.1" andPort:9876];
         NSLog(@"Socket descriptor: %d", socketDescriptor);
@@ -57,7 +58,7 @@ int main(int argc, const char * argv[]) {
         else {
             NSLog(@"Failed to send JSON data");
         }
-        
+        */
         
     
     return NSApplicationMain(argc, argv);
