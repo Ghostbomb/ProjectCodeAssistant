@@ -10,7 +10,7 @@ numberOfLineToPrint = 1
 
 # Random Number Generator from 1 to #
 def random_number_generator(max_num):
-    return random.randint(1, max_num)
+    return random.randint(1, max_num-1)
 
 
 # Check if file exists, if not create it
