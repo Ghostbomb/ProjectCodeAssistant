@@ -30,8 +30,8 @@
 
     #ifdef DEBUG_DEV
         NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        self.userProjectName.stringValue = [NSString stringWithFormat:@"TestProject %@", [dateFormatter stringFromDate:[NSDate date]]];
+        [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+        self.userProjectName.stringValue = [NSString stringWithFormat:@"TestProject%@", [dateFormatter stringFromDate:[NSDate date]]];
         // have this be a folder in the user's home directory
         self.FolderDirectoryField.stringValue = [NSString stringWithFormat:@"%@/Xcode_DEV/ProjectCodeAssistant/test/", NSHomeDirectory()];
         // self.userBranchName.stringValue = @"main";
@@ -171,6 +171,26 @@ static void runShellScript(const char *command) {
     }
 }
 
+static void ideSelectorCommand(ViewController *object, NSString **runCommand) {
+    //create a switch with Visual studio, Intellij, CLion, PyCharm and open each program with passing in the path to the folder
+    if([object.IDESelectorPopUpBox.stringValue isEqualToString:@"Visual Studio Code"]){
+        *runCommand = [NSString stringWithFormat:@"cd \"%@\" && code .", [[Globals sharedInstance] lastCreatedProject]];
+    }else if([object.IDESelectorPopUpBox.stringValue isEqualToString:@"Intellij"]){
+        *runCommand = [NSString stringWithFormat:@"open -a \"IntelliJ IDEA.app\" \"%@\"", [[Globals sharedInstance] lastCreatedProject]];
+    }else if([object.IDESelectorPopUpBox.stringValue isEqualToString:@"CLion"]){
+        *runCommand = [NSString stringWithFormat:@"open -a \"CLion.app\" \"%@\"", [[Globals sharedInstance] lastCreatedProject]];
+    }else if([object.IDESelectorPopUpBox.stringValue isEqualToString:@"PyCharm"]){
+        *runCommand = [NSString stringWithFormat:@"open -a \"PyCharm.app\" \"%@\"", [[Globals sharedInstance] lastCreatedProject]];
+    }
+}
+
+static void convertHTTPtoSSH(NSString **dataString) {
+    *dataString = [*dataString stringByReplacingOccurrencesOfString:@"https://" withString:@"git@"];
+    *dataString = [*dataString stringByReplacingOccurrencesOfString:@".com/" withString:@".com:"];
+    *dataString = [*dataString stringByReplacingOccurrencesOfString:@".git" withString:@".git"];
+    NSLog(@"Converted data: %@", *dataString);
+}
+
 - (IBAction)runCreateProject:(NSButton *)sender {
     [self clearLogTextField];
         
@@ -197,6 +217,8 @@ static void runShellScript(const char *command) {
     NSString *runCommand = [NSString stringWithFormat:@"cd \"%@\" && git init --initial-branch=\"%@\"", [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
     // Execute the command
     runShellScript([runCommand UTF8String]);
+    runCommand = [NSString stringWithFormat:@"cd \"%@\" && echo \"# %@\" >> README.md", [[Globals sharedInstance] lastCreatedProject], self.userProjectName.stringValue];
+    runShellScript([runCommand UTF8String]);
     
     // Send Data
     sendJSONData(self, jsonData, socketClient, socketDescriptor);
@@ -205,10 +227,25 @@ static void runShellScript(const char *command) {
     NSData *data = [socketClient receiveDataOnSocket:socketDescriptor];
     NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"Received data: %@", dataString);
-    if(dataString != nil){
-        // print to screen
+    if(dataString != nil){        
+        [self appendTextToTextField:@"Received data from Microservice"];
+        [self appendTextToTextField:dataString];
 
+//        convertHTTPtoSSH(&dataString);
+        
+        runCommand = [NSString stringWithFormat:@"cd \"%@\" && git remote add origin \"%@\"", [[Globals sharedInstance] lastCreatedProject], dataString];
+        runShellScript([runCommand UTF8String]);
+    }else{
+        [self appendTextToTextField:@"Failed to receive data from Microservice"];
+        return;
     }
+
+    runCommand = [NSString stringWithFormat:@"cd \"%@\" && git add . && git commit -m \"Initial Commit\" && git push -u origin %@", [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
+    runShellScript([runCommand UTF8String]);
+
+        // Check IDE selector and run proper command to open IDE
+    ideSelectorCommand(self, &runCommand);
+    runShellScript([runCommand UTF8String]);
 
 }
 
