@@ -16,28 +16,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    ImageAndTextView *item1 = [[ImageAndTextView alloc] initWithFrame:NSMakeRect(0, 0, 200, 42)];
-//        item1.image = [NSImage imageNamed:@"square.and.arrow.up"];
-//        item1.text = @"Item 1";
-//        [self.IDESelectorPopUpBox addItemWithObjectValue:item1];
-//
-//        ImageAndTextView *item2 = [[ImageAndTextView alloc] initWithFrame:NSMakeRect(0, 0, 200, 42)];
-//        item2.image = [NSImage imageNamed:@"square.and.arrow.up"];
-//        item2.text = @"Item 2";
-//        [self.IDESelectorPopUpBox addItemWithObjectValue:item2];
-
-    // Do any additional setup after loading the view.
+    
+    if ([self runDepCheck:@"git --version"]) {
+        NSLog(@"Git is installed");
+    }
+    else {
+        NSLog(@"Git is not installed");
+        [self appendTextToTextField:@"ERROR: Git is not installed"];
+        [self appendTextToTextField:@"Please install and restart"];
+        self.createProjectButton.enabled = NO;
+    }
 
     #ifdef DEBUG_DEV
         NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
         self.userProjectName.stringValue = [NSString stringWithFormat:@"TestProject%@", [dateFormatter stringFromDate:[NSDate date]]];
-        // have this be a folder in the user's home directory
         self.FolderDirectoryField.stringValue = [NSString stringWithFormat:@"%@/Xcode_DEV/ProjectCodeAssistant/test/", NSHomeDirectory()];
-        // self.userBranchName.stringValue = @"main";
         self.IDESelectorPopUpBox.stringValue = @"CLion";
     #endif
 
+}
+
+
+- (BOOL) runDepCheck:(NSString *)command {
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/bin/bash"];
+    [task setArguments:@[@"-c", command]];
+    [task setStandardOutput:[NSPipe pipe]];
+    [task launch];
+    [task waitUntilExit];
+    int status = [task terminationStatus];
+    NSLog(@"Dep Status: %d", status);
+
+    if (status == 0) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
 }
 
 - (IBAction)openFileBrowser:(id)sender {
@@ -61,8 +77,6 @@
 
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
-
-    // Update the view, if already loaded.
 }
 
 - (void)appendTextToTextField:(NSString *)text {
@@ -83,7 +97,8 @@ static void createFolder(ViewController *object, NSString *userLocation, NSStrin
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *folderPath = [userLocation stringByAppendingPathComponent:userName];
     NSError *error;
-    BOOL folderCreationSuccess = [fileManager createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error];
+    BOOL folderCreationSuccess = [fileManager createDirectoryAtPath:folderPath
+                                        withIntermediateDirectories:YES attributes:nil error:&error];
     if (folderCreationSuccess) {
         NSLog(@"Folder created successfully");
         [object appendTextToTextField:@"Folder created successfully"];
@@ -104,7 +119,6 @@ static void buildJSONData(ViewController *object, NSDictionary **jsonData, NSStr
     NSString *userBranchName = object->_userBranchName.stringValue;
     *userLocation = object->_userLocation.stringValue;
     BOOL userPublishRepo = object->_userPublishRepo.state;
-    
     
     *jsonData = @{
         @"name": *userName,
@@ -158,7 +172,7 @@ static void dataFilledOutCheck(ViewController *object) {
 }
 
 
-static void runShellScript(const char *command) {
+static BOOL runShellScript(const char *command) {
     // Execute the command
     NSLog(@"Executing commands: %s", command);
     int result = system(command);
@@ -166,8 +180,10 @@ static void runShellScript(const char *command) {
     // Check if the command executed successfully
     if (result == 0) {
         NSLog(@"Command executed successfully");
+        return YES;
     } else {
         NSLog(@"Command failed with exit code %d", result);
+        return NO;
     }
 }
 
@@ -193,13 +209,11 @@ static void convertHTTPtoSSH(NSString **dataString) {
 
 - (IBAction)runCreateProject:(NSButton *)sender {
     [self clearLogTextField];
-        
-    // #ifndef DEBUG
-        dataFilledOutCheck(self);
-    // #endif
+    dataFilledOutCheck(self);
     
     [self appendTextToTextField:@"Creating Project..."];
-    // Connect
+    
+    // Connect Socket
     SocketClient * socketClient;
     int socketDescriptor;
     connectToSocket(self, &socketClient, &socketDescriptor);
@@ -213,14 +227,24 @@ static void convertHTTPtoSSH(NSString **dataString) {
     // Create a folder with the name of the project
     createFolder(self, userLocation, userName);
     
+    // Execute commands for git initializiation
+    NSString *runCommand = [NSString stringWithFormat:@"cd \"%@\" && git init --initial-branch=\"%@\"",
+                            [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
 
-    NSString *runCommand = [NSString stringWithFormat:@"cd \"%@\" && git init --initial-branch=\"%@\"", [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
-    // Execute the command
-    runShellScript([runCommand UTF8String]);
-    runCommand = [NSString stringWithFormat:@"cd \"%@\" && echo \"# %@\" >> README.md", [[Globals sharedInstance] lastCreatedProject], self.userProjectName.stringValue];
-    runShellScript([runCommand UTF8String]);
+    if(!runShellScript([runCommand UTF8String])){
+        [self appendTextToTextField:@"Failed to run command:"];
+        [self appendTextToTextField:runCommand];
+        return;
+    };
+    runCommand = [NSString stringWithFormat:@"cd \"%@\" && echo \"# %@\" >> README.md",
+                  [[Globals sharedInstance] lastCreatedProject], self.userProjectName.stringValue];
+    if(!runShellScript([runCommand UTF8String])){
+        [self appendTextToTextField:@"Failed to run command:"];
+        [self appendTextToTextField:runCommand];
+        return;
+    };
     
-    // Send Data
+    // Send Data to Microservice
     sendJSONData(self, jsonData, socketClient, socketDescriptor);
 
     // Receive Data and set to "repoLink" variable and print to screen
@@ -230,23 +254,43 @@ static void convertHTTPtoSSH(NSString **dataString) {
     if(dataString != nil){        
         [self appendTextToTextField:@"Received data from Microservice"];
         [self appendTextToTextField:dataString];
-
 //        convertHTTPtoSSH(&dataString);
-        
-        runCommand = [NSString stringWithFormat:@"cd \"%@\" && git remote add origin \"%@\"", [[Globals sharedInstance] lastCreatedProject], dataString];
-        runShellScript([runCommand UTF8String]);
+        runCommand = [NSString stringWithFormat:@"cd \"%@\" && git remote add origin \"%@\"",
+                      [[Globals sharedInstance] lastCreatedProject], dataString];
+        if(!runShellScript([runCommand UTF8String])){
+        [self appendTextToTextField:@"Failed to run command:"];
+        [self appendTextToTextField:runCommand];
+        return;
+    };;
     }else{
         [self appendTextToTextField:@"Failed to receive data from Microservice"];
         return;
     }
 
-    runCommand = [NSString stringWithFormat:@"cd \"%@\" && git add . && git commit -m \"Initial Commit\" && git push -u origin %@", [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
-    runShellScript([runCommand UTF8String]);
+    runCommand = [NSString stringWithFormat:@"cd \"%@\" && git add . && git commit -m \"Initial Commit\" && git push -u origin %@",
+                  [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
+    if(!runShellScript([runCommand UTF8String])){
+        [self appendTextToTextField:@"Failed to run command:"];
+        [self appendTextToTextField:runCommand];
+        return;
+    };;
 
         // Check IDE selector and run proper command to open IDE
     ideSelectorCommand(self, &runCommand);
-    runShellScript([runCommand UTF8String]);
+    if(!runShellScript([runCommand UTF8String])){
+        [self appendTextToTextField:@"Failed to run command:"];
+        [self appendTextToTextField:runCommand];
+        return;
+    };;
 
+}
+
+- (IBAction)updatedFolderIconPath:(id)sender {
+    self.FolderDirectoryField.stringValue = self.FolderDirectoryPathController.URL.path;
+}
+
+- (IBAction)updatedFolderStringPath:(id)sender {
+    self.FolderDirectoryPathController.URL = [NSURL fileURLWithPath:self.FolderDirectoryField.stringValue];
 }
 
 - (IBAction)userUndoButton:(NSButton *)sender {
