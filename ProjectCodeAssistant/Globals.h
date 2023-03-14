@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Globals : NSObject
 
-#define DEBUG_DEV
+//#define DEBUG_DEV
 
 @property(nonatomic, strong) NSString *lastCreatedProject;
 
