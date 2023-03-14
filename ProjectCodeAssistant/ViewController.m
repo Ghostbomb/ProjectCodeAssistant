@@ -10,6 +10,8 @@
 #import "Globals.h"
 //#import "ImageAndTextView.h"
 
+#define PROGRESSINDICATORFACTOR 6
+
 @implementation ViewController
 
 
@@ -207,9 +209,16 @@ static void convertHTTPtoSSH(NSString **dataString) {
     NSLog(@"Converted data: %@", *dataString);
 }
 
+//create funciton to incarment ProgressIndicator
+static void incarmentProgressIndicator(ViewController *object) {
+    [object.ProgressIndicator setDoubleValue:[object.ProgressIndicator doubleValue] + 100/PROGRESSINDICATORFACTOR];
+}
+
 - (IBAction)runCreateProject:(NSButton *)sender {
     [self clearLogTextField];
     dataFilledOutCheck(self);
+    incarmentProgressIndicator(self);
+    
     
     [self appendTextToTextField:@"Creating Project..."];
     
@@ -217,6 +226,8 @@ static void convertHTTPtoSSH(NSString **dataString) {
     SocketClient * socketClient;
     int socketDescriptor;
     connectToSocket(self, &socketClient, &socketDescriptor);
+    incarmentProgressIndicator(self);
+
 
     //Grab data and convert to JSON with proper bool values/conversions
     NSString * userName;
@@ -226,6 +237,7 @@ static void convertHTTPtoSSH(NSString **dataString) {
 
     // Create a folder with the name of the project
     createFolder(self, userLocation, userName);
+    incarmentProgressIndicator(self);
     
     // Execute commands for git initializiation
     NSString *runCommand = [NSString stringWithFormat:@"cd \"%@\" && git init --initial-branch=\"%@\"",
@@ -243,6 +255,7 @@ static void convertHTTPtoSSH(NSString **dataString) {
         [self appendTextToTextField:runCommand];
         return;
     };
+    incarmentProgressIndicator(self);
     
     // Send Data to Microservice
     sendJSONData(self, jsonData, socketClient, socketDescriptor);
@@ -266,14 +279,15 @@ static void convertHTTPtoSSH(NSString **dataString) {
         [self appendTextToTextField:@"Failed to receive data from Microservice"];
         return;
     }
+    incarmentProgressIndicator(self);
 
     runCommand = [NSString stringWithFormat:@"cd \"%@\" && git add . && git commit -m \"Initial Commit\" && git push -u origin %@",
                   [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
     if(!runShellScript([runCommand UTF8String])){
         [self appendTextToTextField:@"Failed to run command:"];
         [self appendTextToTextField:runCommand];
-        return;
-    };;
+//        return;
+    };
 
         // Check IDE selector and run proper command to open IDE
     ideSelectorCommand(self, &runCommand);
@@ -281,7 +295,8 @@ static void convertHTTPtoSSH(NSString **dataString) {
         [self appendTextToTextField:@"Failed to run command:"];
         [self appendTextToTextField:runCommand];
         return;
-    };;
+    };
+    incarmentProgressIndicator(self);
 
 }
 
