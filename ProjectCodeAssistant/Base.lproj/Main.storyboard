@@ -706,7 +706,7 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="632" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="804" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLv-Fk-f3f">
@@ -825,7 +825,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gep-0U-Tg0">
-                                <rect key="frame" x="226" y="19" width="181" height="25"/>
+                                <rect key="frame" x="312" y="19" width="181" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gep-0U-Tg0" secondAttribute="height" multiplier="181:23" id="Khz-eN-88j"/>
                                     <constraint firstAttribute="width" constant="181" id="N11-Im-gUP"/>
@@ -839,10 +839,10 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tch-RV-8b2">
-                                <rect key="frame" x="408" y="54" width="204" height="196"/>
+                                <rect key="frame" x="371" y="52" width="413" height="196"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4rd-iT-Zb9">
-                                    <font key="font" metaFont="smallSystem"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4rd-iT-Zb9">
+                                    <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -868,19 +868,8 @@
                                     </connections>
                                 </pathCell>
                             </pathControl>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HUr-aC-ltg">
-                                <rect key="frame" x="477" y="15" width="67" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Undo" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QJq-Nq-LWr">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="userUndoButton:" target="XfG-lQ-9wD" id="5pA-ZP-PL6"/>
-                                </connections>
-                            </button>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E4G-bi-mVF">
-                                <rect key="frame" x="589" y="16" width="25" height="25"/>
+                                <rect key="frame" x="761" y="14" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JTU-uQ-zyn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -891,10 +880,10 @@
                                 </connections>
                             </button>
                             <progressIndicator misplaced="YES" maxValue="100" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Kro-No-fIh">
-                                <rect key="frame" x="415" y="24" width="16" height="16"/>
+                                <rect key="frame" x="587" y="24" width="16" height="16"/>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-Vw-26a">
-                                <rect key="frame" x="406" y="248" width="80" height="16"/>
+                                <rect key="frame" x="369" y="245" width="80" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Console Log" id="Rgt-po-9WI">
                                     <font key="font" metaFont="system"/>
@@ -902,6 +891,17 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HUr-aC-ltg">
+                                <rect key="frame" x="662" y="11" width="67" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Undo" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QJq-Nq-LWr">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="userUndoButton:" target="XfG-lQ-9wD" id="5pA-ZP-PL6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Kro-No-fIh" firstAttribute="centerY" secondItem="gep-0U-Tg0" secondAttribute="centerY" id="2XU-e2-aov"/>
@@ -934,7 +934,7 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="IDx-kJ-RSO"/>
             </objects>
-            <point key="canvasLocation" x="151" y="655"/>
+            <point key="canvasLocation" x="237" y="655"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="h5v-An-mYA">

@@ -8,7 +8,6 @@
 #import "ViewController.h"
 #import "SocketClient.h"
 #import "Globals.h"
-//#import "ImageAndTextView.h"
 
 #define PROGRESSINDICATORFACTOR 6
 
