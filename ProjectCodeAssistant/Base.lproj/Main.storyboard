@@ -859,7 +859,7 @@
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tch-RV-8b2">
                                 <rect key="frame" x="408" y="54" width="204" height="196"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4rd-iT-Zb9">
+                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4rd-iT-Zb9">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -904,6 +904,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <segue destination="WgL-QQ-2JU" kind="popover" popoverAnchorView="E4G-bi-mVF" popoverBehavior="t" preferredEdge="maxY" id="XJ7-OC-he2"/>
+                                </connections>
                             </button>
                             <progressIndicator misplaced="YES" maxValue="100" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Kro-No-fIh">
                                 <rect key="frame" x="415" y="24" width="16" height="16"/>
@@ -1003,6 +1006,45 @@
             <point key="canvasLocation" x="-573" y="967"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="B9V-fx-w7d">
+            <objects>
+                <viewController id="WgL-QQ-2JU" sceneMemberID="viewController">
+                    <view key="view" id="Sh3-C3-xhA">
+                        <rect key="frame" x="0.0" y="0.0" width="445" height="295"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="I9g-pF-tZm">
+                                <rect key="frame" x="18" y="28" width="409" height="240"/>
+                                <textFieldCell key="cell" selectable="YES" id="31B-Uc-AtZ">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <string key="title">
+Step 1: Type in your Project Name. This will create a folder with this name as well as a git repository
+
+Step 2: Select the IDE you automatically open when the project is created.
+
+Step 3: The next options are GitHub specific, but Publish Repo will expose the folder to the world, and the private variable will dictate whether just you can see it on your Github account or everyone.
+
+Step 4: You can usually leave this as default but this is the default branch that will be created when you create your git repository. 
+
+Step 5: Select where to store the folder on your own computer</string>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="I9g-pF-tZm" secondAttribute="trailing" constant="20" symbolic="YES" id="4rl-Qw-mfd"/>
+                            <constraint firstItem="I9g-pF-tZm" firstAttribute="centerY" secondItem="Sh3-C3-xhA" secondAttribute="centerY" id="6wW-5S-pbH"/>
+                            <constraint firstItem="I9g-pF-tZm" firstAttribute="leading" secondItem="Sh3-C3-xhA" secondAttribute="leading" constant="20" symbolic="YES" id="C19-Jy-4OK"/>
+                            <constraint firstItem="I9g-pF-tZm" firstAttribute="centerX" secondItem="Sh3-C3-xhA" secondAttribute="centerX" id="qLf-gw-l93"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="pWa-PC-3fd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-491.5" y="604.5"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="nDa-6I-PwU">
             <objects>
                 <customObject id="fdu-Q8-VyU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1033,7 +1075,7 @@
                                 <rect key="frame" x="20" y="17" width="409" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="22e-9p-xcM">
-                                    <font key="font" metaFont="system" size="9"/>
+                                    <font key="font" metaFont="miniSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1077,7 +1119,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8dH-nC-nRm">
                                 <rect key="frame" x="97" y="215" width="85" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="SSH Keys" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="OXI-qv-Lwj">
+                                <buttonCell key="cell" type="check" title="SSH Keys" bezelStyle="regularSquare" imagePosition="left" inset="2" id="OXI-qv-Lwj">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1107,16 +1149,46 @@
             </objects>
             <point key="canvasLocation" x="787.5" y="1020"/>
         </scene>
-        <!--Logging-->
+        <!--Extra Commands-->
         <scene sceneID="9S3-zL-IFO">
             <objects>
-                <viewController title="Logging" id="4yJ-Ky-ta6" sceneMemberID="viewController">
+                <viewController title="Extra Commands" id="4yJ-Ky-ta6" sceneMemberID="viewController">
                     <view key="view" id="LdI-5M-Nb1">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuP-00-6VD">
+                                <rect key="frame" x="20" y="27" width="410" height="215"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="//Code goes here" drawsBackground="YES" id="snp-8T-tzr">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDN-A2-5Og">
+                                <rect key="frame" x="20" y="275" width="108" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Extra Commands" id="zRe-wB-kN3">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bx3-Qd-97k">
+                                <rect key="frame" x="32" y="258" width="264" height="11"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="These Commands will run after folder creation in the folder" id="KT9-s3-ET3">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
                     </view>
                 </viewController>
                 <customObject id="VFJ-DX-x7b" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="2dh-D5-dfw"/>
             </objects>
             <point key="canvasLocation" x="783" y="1392"/>
         </scene>

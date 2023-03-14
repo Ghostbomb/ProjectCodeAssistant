@@ -198,15 +198,14 @@ static void convertHTTPtoSSH(NSString **dataString) {
     NSLog(@"Converted data: %@", *dataString);
 }
 
-//create funciton to incarment ProgressIndicator
-static void incarmentProgressIndicator(ViewController *object) {
+static void incrementProgressIndicator(ViewController *object) {
     [object.ProgressIndicator setDoubleValue:[object.ProgressIndicator doubleValue] + 100 / PROGRESSINDICATORFACTOR];
 }
 
 - (IBAction)runCreateProject:(NSButton *)sender {
     [self clearLogTextField];
     dataFilledOutCheck(self);
-    incarmentProgressIndicator(self);
+    incrementProgressIndicator(self);
 
 
     [self appendTextToTextField:@"Creating Project..."];
@@ -215,7 +214,7 @@ static void incarmentProgressIndicator(ViewController *object) {
     SocketClient *socketClient;
     int socketDescriptor;
     connectToSocket(self, &socketClient, &socketDescriptor);
-    incarmentProgressIndicator(self);
+    incrementProgressIndicator(self);
 
 
     //Grab data and convert to JSON with proper bool values/conversions
@@ -226,9 +225,9 @@ static void incarmentProgressIndicator(ViewController *object) {
 
     // Create a folder with the name of the project
     createFolder(self, userLocation, userName);
-    incarmentProgressIndicator(self);
+    incrementProgressIndicator(self);
 
-    // Execute commands for git initializiation
+    // Execute commands for git initialization
     NSString *runCommand = [NSString stringWithFormat:@"cd \"%@\" && git init --initial-branch=\"%@\"", [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
 
     if (!runShellScript([runCommand UTF8String])) {
@@ -242,7 +241,7 @@ static void incarmentProgressIndicator(ViewController *object) {
         [self appendTextToTextField:runCommand];
         return;
     };
-    incarmentProgressIndicator(self);
+    incrementProgressIndicator(self);
 
     // Send Data to Microservice
     sendJSONData(self, jsonData, socketClient, socketDescriptor);
@@ -254,7 +253,6 @@ static void incarmentProgressIndicator(ViewController *object) {
     if (dataString != nil) {
         [self appendTextToTextField:@"Received data from Microservice"];
         [self appendTextToTextField:dataString];
-//        convertHTTPtoSSH(&dataString);
         runCommand = [NSString stringWithFormat:@"cd \"%@\" && git remote add origin \"%@\"", [[Globals sharedInstance] lastCreatedProject], dataString];
         if (!runShellScript([runCommand UTF8String])) {
             [self appendTextToTextField:@"Failed to run command:"];
@@ -265,7 +263,7 @@ static void incarmentProgressIndicator(ViewController *object) {
         [self appendTextToTextField:@"Failed to receive data from Microservice"];
         return;
     }
-    incarmentProgressIndicator(self);
+    incrementProgressIndicator(self);
 
     runCommand = [NSString stringWithFormat:@"cd \"%@\" && git add . && git commit -m \"Initial Commit\" && git push -u origin %@", [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
     if (!runShellScript([runCommand UTF8String])) {
@@ -281,7 +279,7 @@ static void incarmentProgressIndicator(ViewController *object) {
         [self appendTextToTextField:runCommand];
         return;
     };
-    incarmentProgressIndicator(self);
+    incrementProgressIndicator(self);
 
 }
 

@@ -31,7 +31,6 @@
 - (IBAction)updatedFolderStringPath:(id)sender;
 
 
-
 //Function Prototypes
 - (void)appendTextToTextField:(NSString *)text;
 - (void)clearLogTextField;
