@@ -18,15 +18,15 @@
         NSLog(@"Failed to create socket");
         return -1;
     }
-    
+
     struct sockaddr_in address;
     address.sin_len = sizeof(address);
     address.sin_family = AF_INET;
     address.sin_port = htons(port);
     address.sin_addr.s_addr = inet_addr([ip UTF8String]);
     bzero(&(address.sin_zero), 8);
-    
-    int connectionStatus = connect(socketDescriptor, (struct sockaddr *)&address, sizeof(address));
+
+    int connectionStatus = connect(socketDescriptor, (struct sockaddr *) &address, sizeof(address));
     NSLog(@"Socket Info:");
     NSLog(@"ipAddress: %@", ip);
     NSLog(@"portNumber: %d", port);
@@ -34,7 +34,7 @@
         NSLog(@"Failed to connect to server");
         return -1;
     }
-    
+
     return socketDescriptor;
 }
 
@@ -47,7 +47,7 @@
         NSLog(@"Failed to send data");
         return NO;
     }
-    
+
     return YES;
 }
 
@@ -59,12 +59,9 @@
         NSLog(@"Failed to receive data");
         return nil;
     }
-    
+
     return [NSData dataWithBytes:buffer length:bytesRead];
 }
-
-
-
 
 
 @end

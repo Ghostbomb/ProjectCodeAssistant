@@ -12,7 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SocketClient : NSObject
 
 - (int)connectToServerWithIP:(NSString *)ipAddress andPort:(int)portNumber;
+
 - (BOOL)sendData:(NSData *)data onSocket:(int)socketDescriptor;
+
 - (NSData *)receiveDataOnSocket:(int)socketDescriptor;
 
 @end
