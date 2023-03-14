@@ -11,14 +11,12 @@
 #include <arpa/inet.h>
 
 @implementation SocketClient
-
 - (int)connectToServerWithIP:(NSString *)ip andPort:(int)port {
     int socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
     if (socketDescriptor == -1) {
         NSLog(@"Failed to create socket");
         return -1;
     }
-
     struct sockaddr_in address;
     address.sin_len = sizeof(address);
     address.sin_family = AF_INET;
@@ -34,7 +32,6 @@
         NSLog(@"Failed to connect to server");
         return -1;
     }
-
     return socketDescriptor;
 }
 
@@ -47,7 +44,6 @@
         NSLog(@"Failed to send data");
         return NO;
     }
-
     return YES;
 }
 
@@ -59,7 +55,6 @@
         NSLog(@"Failed to receive data");
         return nil;
     }
-
     return [NSData dataWithBytes:buffer length:bytesRead];
 }
 
