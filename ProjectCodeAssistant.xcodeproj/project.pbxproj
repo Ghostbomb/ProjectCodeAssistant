@@ -16,7 +16,6 @@
 		3EEF9557298758C600F4DA0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEF9556298758C600F4DA0D /* ViewController.m */; };
 		3EEF9559298758C700F4DA0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EEF9558298758C700F4DA0D /* Assets.xcassets */; };
 		3EEF955C298758C700F4DA0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EEF955A298758C700F4DA0D /* Main.storyboard */; };
-		3EEF95672988CEAD00F4DA0D /* ImageAndTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEF95662988CEAD00F4DA0D /* ImageAndTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,8 +34,6 @@
 		3EEF9558298758C700F4DA0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3EEF955B298758C700F4DA0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EEF955F298758C700F4DA0D /* ProjectCodeAssistant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProjectCodeAssistant.entitlements; sourceTree = "<group>"; };
-		3EEF95652988CEAD00F4DA0D /* ImageAndTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAndTextView.h; sourceTree = "<group>"; };
-		3EEF95662988CEAD00F4DA0D /* ImageAndTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +78,6 @@
 		3EEF9551298758C600F4DA0D /* ProjectCodeAssistant */ = {
 			isa = PBXGroup;
 			children = (
-				3EEF95652988CEAD00F4DA0D /* ImageAndTextView.h */,
-				3EEF95662988CEAD00F4DA0D /* ImageAndTextView.m */,
 				3EEF9553298758C600F4DA0D /* AppDelegate.m */,
 				3EEF9552298758C600F4DA0D /* AppDelegate.h */,
 				3EEF9556298758C600F4DA0D /* ViewController.m */,
@@ -173,7 +168,6 @@
 				3EEF9554298758C600F4DA0D /* AppDelegate.m in Sources */,
 				3E615B7F29A70B47006472A1 /* main.m in Sources */,
 				3E615B8C29A74208006472A1 /* Globals.m in Sources */,
-				3EEF95672988CEAD00F4DA0D /* ImageAndTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

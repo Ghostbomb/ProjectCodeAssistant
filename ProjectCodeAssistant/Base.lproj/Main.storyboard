@@ -684,7 +684,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Project Creation Assistant" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="758" height="279"/>
@@ -706,7 +706,7 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="632" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="804" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLv-Fk-f3f">
@@ -722,24 +722,6 @@
                                 <rect key="frame" x="18" y="229" width="86" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Project Name" id="c42-mi-ZFI">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cWa-X3-tSt">
-                                <rect key="frame" x="114" y="197" width="249" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="zKy-eL-55H">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vlM-yG-h1W">
-                                <rect key="frame" x="18" y="200" width="86" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Project Name" id="Rs5-aM-vQf">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -775,6 +757,9 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="updatedFolderStringPath:" target="XfG-lQ-9wD" id="T9R-lB-A0N"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2La-NY-oGd">
                                 <rect key="frame" x="18" y="87" width="56" height="16"/>
@@ -840,7 +825,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gep-0U-Tg0">
-                                <rect key="frame" x="226" y="19" width="181" height="25"/>
+                                <rect key="frame" x="312" y="19" width="181" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gep-0U-Tg0" secondAttribute="height" multiplier="181:23" id="Khz-eN-88j"/>
                                     <constraint firstAttribute="width" constant="181" id="N11-Im-gUP"/>
@@ -854,10 +839,10 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tch-RV-8b2">
-                                <rect key="frame" x="408" y="54" width="204" height="196"/>
+                                <rect key="frame" x="371" y="52" width="413" height="196"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4rd-iT-Zb9">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -873,15 +858,18 @@
                                 </connections>
                             </button>
                             <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NL1-GJ-7Cy">
-                                <rect key="frame" x="116" y="60" width="247" height="22"/>
+                                <rect key="frame" x="116" y="60" width="247" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <pathCell key="cell" selectable="YES" alignment="left" id="FOP-Mn-h4O">
+                                <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="FOP-Mn-h4O">
                                     <font key="font" metaFont="miniSystem"/>
-                                    <url key="url" string="file:///Applications/"/>
+                                    <url key="url" string="file:///"/>
+                                    <connections>
+                                        <action selector="updatedFolderIconPath:" target="XfG-lQ-9wD" id="oCV-UC-Lta"/>
+                                    </connections>
                                 </pathCell>
                             </pathControl>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HUr-aC-ltg">
-                                <rect key="frame" x="477" y="15" width="67" height="32"/>
+                                <rect key="frame" x="662" y="11" width="67" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Undo" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QJq-Nq-LWr">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -892,18 +880,21 @@
                                 </connections>
                             </button>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E4G-bi-mVF">
-                                <rect key="frame" x="589" y="16" width="25" height="25"/>
+                                <rect key="frame" x="761" y="14" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JTU-uQ-zyn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <segue destination="WgL-QQ-2JU" kind="popover" popoverAnchorView="E4G-bi-mVF" popoverBehavior="t" preferredEdge="maxY" id="XJ7-OC-he2"/>
+                                </connections>
                             </button>
-                            <progressIndicator misplaced="YES" maxValue="100" doubleValue="50" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Kro-No-fIh">
-                                <rect key="frame" x="415" y="24" width="16" height="16"/>
+                            <progressIndicator misplaced="YES" maxValue="100" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Kro-No-fIh">
+                                <rect key="frame" x="587" y="24" width="16" height="16"/>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-Vw-26a">
-                                <rect key="frame" x="406" y="248" width="80" height="16"/>
+                                <rect key="frame" x="369" y="248" width="80" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Console Log" id="Rgt-po-9WI">
                                     <font key="font" metaFont="system"/>
@@ -931,6 +922,7 @@
                         <outlet property="LogTextField" destination="tch-RV-8b2" id="01t-Mc-jYG"/>
                         <outlet property="ProgressIndicator" destination="Kro-No-fIh" id="Pci-0p-YXn"/>
                         <outlet property="button" destination="BSh-ni-zkX" id="4hd-1S-5Bm"/>
+                        <outlet property="createProjectButton" destination="gep-0U-Tg0" id="xVJ-HH-uUy"/>
                         <outlet property="text" destination="tch-RV-8b2" id="Ewn-0Y-xJR"/>
                         <outlet property="userBranchName" destination="tWA-zG-gg2" id="nEW-WS-lrQ"/>
                         <outlet property="userLocation" destination="EVP-yd-q9v" id="wTE-Lr-SXj"/>
@@ -942,7 +934,7 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="IDx-kJ-RSO"/>
             </objects>
-            <point key="canvasLocation" x="151" y="655"/>
+            <point key="canvasLocation" x="237" y="655"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="h5v-An-mYA">
@@ -969,6 +961,44 @@
                 <customObject id="Zgd-eQ-tof" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="109" y="1183"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="B9V-fx-w7d">
+            <objects>
+                <viewController id="WgL-QQ-2JU" sceneMemberID="viewController">
+                    <view key="view" id="Sh3-C3-xhA">
+                        <rect key="frame" x="0.0" y="0.0" width="445" height="295"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="I9g-pF-tZm">
+                                <rect key="frame" x="18" y="36" width="409" height="224"/>
+                                <textFieldCell key="cell" selectable="YES" id="31B-Uc-AtZ">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <mutableString key="title">Step 1: Type in your Project Name. This will create a folder with this name as well as a git repository
+
+Step 2: Select the IDE you automatically open when the project is created.
+
+Step 3: The next options are GitHub specific, but Publish Repo will expose the folder to the world, and the private variable will dictate whether just you can see it on your Github account or everyone.
+
+Step 4: You can usually leave this as default but this is the default branch that will be created when you create your git repository. 
+
+Step 5: Select where to store the folder on your own computer</mutableString>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="I9g-pF-tZm" secondAttribute="trailing" constant="20" symbolic="YES" id="4rl-Qw-mfd"/>
+                            <constraint firstItem="I9g-pF-tZm" firstAttribute="centerY" secondItem="Sh3-C3-xhA" secondAttribute="centerY" id="6wW-5S-pbH"/>
+                            <constraint firstItem="I9g-pF-tZm" firstAttribute="leading" secondItem="Sh3-C3-xhA" secondAttribute="leading" constant="20" symbolic="YES" id="C19-Jy-4OK"/>
+                            <constraint firstItem="I9g-pF-tZm" firstAttribute="centerX" secondItem="Sh3-C3-xhA" secondAttribute="centerX" id="qLf-gw-l93"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="pWa-PC-3fd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="975" y="643"/>
         </scene>
         <!--GitHub-->
         <scene sceneID="IJP-pH-3hn">
@@ -999,7 +1029,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8dH-nC-nRm">
                                 <rect key="frame" x="97" y="215" width="85" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="SSH Keys" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="OXI-qv-Lwj">
+                                <buttonCell key="cell" type="check" title="SSH Keys" bezelStyle="regularSquare" imagePosition="left" inset="2" id="OXI-qv-Lwj">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1029,16 +1059,46 @@
             </objects>
             <point key="canvasLocation" x="787.5" y="1020"/>
         </scene>
-        <!--Logging-->
+        <!--Extra Commands-->
         <scene sceneID="9S3-zL-IFO">
             <objects>
-                <viewController title="Logging" id="4yJ-Ky-ta6" sceneMemberID="viewController">
+                <viewController title="Extra Commands" id="4yJ-Ky-ta6" sceneMemberID="viewController">
                     <view key="view" id="LdI-5M-Nb1">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuP-00-6VD">
+                                <rect key="frame" x="20" y="27" width="410" height="215"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="//Code goes here" drawsBackground="YES" id="snp-8T-tzr">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDN-A2-5Og">
+                                <rect key="frame" x="20" y="275" width="108" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Extra Commands" id="zRe-wB-kN3">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bx3-Qd-97k">
+                                <rect key="frame" x="32" y="258" width="264" height="11"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="These Commands will run after folder creation in the folder" id="KT9-s3-ET3">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
                     </view>
                 </viewController>
                 <customObject id="VFJ-DX-x7b" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="2dh-D5-dfw"/>
             </objects>
             <point key="canvasLocation" x="783" y="1392"/>
         </scene>
