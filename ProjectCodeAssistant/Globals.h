@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 #define DEBUG_DEV
 
 @property(nonatomic, strong) NSString *lastCreatedProject;
-//@property (nonatomic, assign) NSInteger myInteger;
 
 + (Globals *)sharedInstance;
 

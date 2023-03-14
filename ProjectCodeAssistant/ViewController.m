@@ -26,16 +26,15 @@
         self.createProjectButton.enabled = NO;
     }
 
-#ifdef DEBUG_DEV
+    #ifdef DEBUG_DEV
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
     self.userProjectName.stringValue = [NSString stringWithFormat:@"TestProject%@", [dateFormatter stringFromDate:[NSDate date]]];
     self.FolderDirectoryField.stringValue = [NSString stringWithFormat:@"%@/Xcode_DEV/ProjectCodeAssistant/test/", NSHomeDirectory()];
     self.IDESelectorPopUpBox.stringValue = @"CLion";
-#endif
+    #endif
 
 }
-
 
 - (BOOL)runDepCheck:(NSString *)command {
     NSTask *task = [[NSTask alloc] init];
@@ -95,7 +94,10 @@ static void createFolder(ViewController *object, NSString *userLocation, NSStrin
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *folderPath = [userLocation stringByAppendingPathComponent:userName];
     NSError *error;
-    BOOL folderCreationSuccess = [fileManager createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error];
+    BOOL folderCreationSuccess = [fileManager createDirectoryAtPath:folderPath
+                                        withIntermediateDirectories:YES
+                                                         attributes:nil
+                                                              error:&error];
     if (folderCreationSuccess) {
         NSLog(@"Folder created successfully");
         [object appendTextToTextField:@"Folder created successfully"];
@@ -108,8 +110,7 @@ static void createFolder(ViewController *object, NSString *userLocation, NSStrin
     }
 }
 
-static void
-buildJSONData(ViewController *object, NSDictionary **jsonData, NSString **userLocation, NSString **userName) {
+static void buildJSONData(ViewController *object, NSDictionary **jsonData, NSString **userLocation, NSString **userName) {
     *userName = object->_userProjectName.stringValue;
     NSString *userDescription = @"test";
     BOOL userPrivateGit = object->_userPrivateGit.state;
@@ -121,8 +122,7 @@ buildJSONData(ViewController *object, NSDictionary **jsonData, NSString **userLo
                   @"branch": userBranchName, @"location": *userLocation, @"publish": @(userPublishRepo)};
 }
 
-static void
-sendJSONData(ViewController *object, NSDictionary *jsonData, SocketClient *socketClient, int socketDescriptor) {
+static void sendJSONData(ViewController *object, NSDictionary *jsonData, SocketClient *socketClient, int socketDescriptor) {
     NSData *jsonDataToSend = [NSJSONSerialization dataWithJSONObject:jsonData options:0 error:nil];
     BOOL sendDataSuccess = [socketClient sendData:jsonDataToSend onSocket:socketDescriptor];
     if (sendDataSuccess) {
@@ -139,15 +139,8 @@ static void connectToSocket(ViewController *object, SocketClient **socketClient,
     *socketDescriptor = [*socketClient connectToServerWithIP:@"127.0.0.1" andPort:9876];
     if (*socketDescriptor == -1) {
         [object appendTextToTextField:@"Failed to connect to Microservice"];
-        //        return;
     } else {
-        // Wait to receive "Hello from server" from server before going on
-//        NSData *data = [*socketClient receiveDataOnSocket:*socketDescriptor];
-//        NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//        NSLog(@"Received data: %@", dataString);
-//        if(dataString != nil || [dataString isEqualToString:@"Hello from server"]){
         [object appendTextToTextField:@"Connected to Microservice"];
-//        }
     }
 }
 
@@ -163,11 +156,9 @@ static void dataFilledOutCheck(ViewController *object) {
 
 
 static BOOL runShellScript(const char *command) {
-    // Execute the command
     NSLog(@"Executing commands: %s", command);
     int result = system(command);
 
-    // Check if the command executed successfully
     if (result == 0) {
         NSLog(@"Command executed successfully");
         return YES;
@@ -178,15 +169,21 @@ static BOOL runShellScript(const char *command) {
 }
 
 static void ideSelectorCommand(ViewController *object, NSString **runCommand) {
-    //create a switch with Visual studio, Intellij, CLion, PyCharm and open each program with passing in the path to the folder
     if ([object.IDESelectorPopUpBox.stringValue isEqualToString:@"Visual Studio Code"]) {
-        *runCommand = [NSString stringWithFormat:@"cd \"%@\" && code .", [[Globals sharedInstance] lastCreatedProject]];
+        *runCommand = [NSString stringWithFormat:@"cd \"%@\" && code .",
+                       [[Globals sharedInstance] lastCreatedProject]];
+        
     } else if ([object.IDESelectorPopUpBox.stringValue isEqualToString:@"Intellij"]) {
-        *runCommand = [NSString stringWithFormat:@"open -a \"IntelliJ IDEA.app\" \"%@\"", [[Globals sharedInstance] lastCreatedProject]];
+        *runCommand = [NSString stringWithFormat:@"open -a \"IntelliJ IDEA.app\" \"%@\"",
+                       [[Globals sharedInstance] lastCreatedProject]];
+        
     } else if ([object.IDESelectorPopUpBox.stringValue isEqualToString:@"CLion"]) {
-        *runCommand = [NSString stringWithFormat:@"open -a \"CLion.app\" \"%@\"", [[Globals sharedInstance] lastCreatedProject]];
+        *runCommand = [NSString stringWithFormat:@"open -a \"CLion.app\" \"%@\"",
+                       [[Globals sharedInstance] lastCreatedProject]];
+        
     } else if ([object.IDESelectorPopUpBox.stringValue isEqualToString:@"PyCharm"]) {
-        *runCommand = [NSString stringWithFormat:@"open -a \"PyCharm.app\" \"%@\"", [[Globals sharedInstance] lastCreatedProject]];
+        *runCommand = [NSString stringWithFormat:@"open -a \"PyCharm.app\" \"%@\"",
+                       [[Globals sharedInstance] lastCreatedProject]];
     }
 }
 
@@ -201,11 +198,29 @@ static void incrementProgressIndicator(ViewController *object) {
     [object.ProgressIndicator setDoubleValue:[object.ProgressIndicator doubleValue] + 100 / PROGRESSINDICATORFACTOR];
 }
 
+static void handleGitURLData(ViewController *object, NSString **runCommand, SocketClient *socketClient, int socketDescriptor) {
+    NSData *data = [socketClient receiveDataOnSocket:socketDescriptor];
+    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"Received data: %@", dataString);
+    if (dataString != nil) {
+        [object appendTextToTextField:@"Received data from Microservice"];
+        [object appendTextToTextField:dataString];
+        *runCommand = [NSString stringWithFormat:@"cd \"%@\" && git remote add origin \"%@\"",
+                       [[Globals sharedInstance] lastCreatedProject], dataString];
+        if (!runShellScript([*runCommand UTF8String])) {
+            [object appendTextToTextField:@"Failed to run command:"];
+            [object appendTextToTextField:*runCommand];
+            return;
+        };;
+    } else {
+        [object appendTextToTextField:@"Failed to receive data from Microservice"];
+        return;
+    }
+}
+
 - (IBAction)runCreateProject:(NSButton *)sender {
     [self clearLogTextField];
     dataFilledOutCheck(self);
-    incrementProgressIndicator(self);
-
 
     [self appendTextToTextField:@"Creating Project..."];
 
@@ -227,14 +242,16 @@ static void incrementProgressIndicator(ViewController *object) {
     incrementProgressIndicator(self);
 
     // Execute commands for git initialization
-    NSString *runCommand = [NSString stringWithFormat:@"cd \"%@\" && git init --initial-branch=\"%@\"", [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
+    NSString *runCommand = [NSString stringWithFormat:@"cd \"%@\" && git init --initial-branch=\"%@\"",
+                            [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
 
     if (!runShellScript([runCommand UTF8String])) {
         [self appendTextToTextField:@"Failed to run command:"];
         [self appendTextToTextField:runCommand];
         return;
     };
-    runCommand = [NSString stringWithFormat:@"cd \"%@\" && echo \"# %@\" >> README.md", [[Globals sharedInstance] lastCreatedProject], self.userProjectName.stringValue];
+    runCommand = [NSString stringWithFormat:@"cd \"%@\" && echo \"# %@\" >> README.md",
+                  [[Globals sharedInstance] lastCreatedProject], self.userProjectName.stringValue];
     if (!runShellScript([runCommand UTF8String])) {
         [self appendTextToTextField:@"Failed to run command:"];
         [self appendTextToTextField:runCommand];
@@ -246,29 +263,15 @@ static void incrementProgressIndicator(ViewController *object) {
     sendJSONData(self, jsonData, socketClient, socketDescriptor);
 
     // Receive Data and set to "repoLink" variable and print to screen
-    NSData *data = [socketClient receiveDataOnSocket:socketDescriptor];
-    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"Received data: %@", dataString);
-    if (dataString != nil) {
-        [self appendTextToTextField:@"Received data from Microservice"];
-        [self appendTextToTextField:dataString];
-        runCommand = [NSString stringWithFormat:@"cd \"%@\" && git remote add origin \"%@\"", [[Globals sharedInstance] lastCreatedProject], dataString];
-        if (!runShellScript([runCommand UTF8String])) {
-            [self appendTextToTextField:@"Failed to run command:"];
-            [self appendTextToTextField:runCommand];
-            return;
-        };;
-    } else {
-        [self appendTextToTextField:@"Failed to receive data from Microservice"];
-        return;
-    }
+    handleGitURLData(self, &runCommand, socketClient, socketDescriptor);
     incrementProgressIndicator(self);
 
-    runCommand = [NSString stringWithFormat:@"cd \"%@\" && git add . && git commit -m \"Initial Commit\" && git push -u origin %@", [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
+    runCommand = [NSString stringWithFormat:@"cd \"%@\" && git add . && git commit -m \"Initial Commit\" && git push -u origin %@",
+                  [[Globals sharedInstance] lastCreatedProject], self.userBranchName.stringValue];
     if (!runShellScript([runCommand UTF8String])) {
         [self appendTextToTextField:@"Failed to run command:"];
         [self appendTextToTextField:runCommand];
-//        return;
+        return;
     };
 
     // Check IDE selector and run proper command to open IDE
@@ -304,7 +307,9 @@ static void incrementProgressIndicator(ViewController *object) {
 
     // Move the folder to the trash
     NSError *error;
-    BOOL success = [fileManager trashItemAtURL:[NSURL fileURLWithPath:folderPath] resultingItemURL:nil error:&error];
+    BOOL success = [fileManager trashItemAtURL:[NSURL fileURLWithPath:folderPath]
+                              resultingItemURL:nil
+                                         error:&error];
     if (success) {
         NSLog(@"Folder moved to trash successfully");
         NSLog(@"Folder path: %@", folderPath);

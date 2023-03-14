@@ -868,6 +868,17 @@
                                     </connections>
                                 </pathCell>
                             </pathControl>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HUr-aC-ltg">
+                                <rect key="frame" x="662" y="11" width="67" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Undo" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QJq-Nq-LWr">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="userUndoButton:" target="XfG-lQ-9wD" id="5pA-ZP-PL6"/>
+                                </connections>
+                            </button>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E4G-bi-mVF">
                                 <rect key="frame" x="761" y="14" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -883,7 +894,7 @@
                                 <rect key="frame" x="587" y="24" width="16" height="16"/>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-Vw-26a">
-                                <rect key="frame" x="369" y="245" width="80" height="16"/>
+                                <rect key="frame" x="369" y="248" width="80" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Console Log" id="Rgt-po-9WI">
                                     <font key="font" metaFont="system"/>
@@ -891,17 +902,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HUr-aC-ltg">
-                                <rect key="frame" x="662" y="11" width="67" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Undo" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QJq-Nq-LWr">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="userUndoButton:" target="XfG-lQ-9wD" id="5pA-ZP-PL6"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Kro-No-fIh" firstAttribute="centerY" secondItem="gep-0U-Tg0" secondAttribute="centerY" id="2XU-e2-aov"/>
@@ -962,31 +962,6 @@
             </objects>
             <point key="canvasLocation" x="109" y="1183"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="42T-1F-U8U">
-            <objects>
-                <customObject id="oH8-HF-WCM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <windowController id="zKk-Fg-9bK" sceneMemberID="viewController">
-                    <window key="window" title="Dependexnices Check" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="IJg-EQ-5Fg">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="425" y="462" width="480" height="194"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
-                        <view key="contentView" id="iO7-1i-ufY">
-                            <rect key="frame" x="0.0" y="0.0" width="480" height="194"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </view>
-                        <connections>
-                            <outlet property="delegate" destination="zKk-Fg-9bK" id="kId-YE-Z74"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="Zhn-W1-Iwe" kind="relationship" relationship="window.shadowedContentViewController" id="hLx-6F-Kox"/>
-                    </connections>
-                </windowController>
-            </objects>
-            <point key="canvasLocation" x="-573" y="967"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="B9V-fx-w7d">
             <objects>
@@ -996,11 +971,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="I9g-pF-tZm">
-                                <rect key="frame" x="18" y="28" width="409" height="240"/>
+                                <rect key="frame" x="18" y="36" width="409" height="224"/>
                                 <textFieldCell key="cell" selectable="YES" id="31B-Uc-AtZ">
                                     <font key="font" usesAppearanceFont="YES"/>
-                                    <string key="title">
-Step 1: Type in your Project Name. This will create a folder with this name as well as a git repository
+                                    <mutableString key="title">Step 1: Type in your Project Name. This will create a folder with this name as well as a git repository
 
 Step 2: Select the IDE you automatically open when the project is created.
 
@@ -1008,7 +982,7 @@ Step 3: The next options are GitHub specific, but Publish Repo will expose the f
 
 Step 4: You can usually leave this as default but this is the default branch that will be created when you create your git repository. 
 
-Step 5: Select where to store the folder on your own computer</string>
+Step 5: Select where to store the folder on your own computer</mutableString>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1024,53 +998,7 @@ Step 5: Select where to store the folder on your own computer</string>
                 </viewController>
                 <customObject id="pWa-PC-3fd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-491.5" y="604.5"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="nDa-6I-PwU">
-            <objects>
-                <customObject id="fdu-Q8-VyU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <viewController id="Zhn-W1-Iwe" sceneMemberID="viewController">
-                    <view key="view" autoresizesSubviews="NO" id="Ouq-Uo-hoi">
-                        <rect key="frame" x="0.0" y="0.0" width="449" height="108"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h6A-8Y-PGs">
-                                <rect key="frame" x="136" y="68" width="176" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="bSY-fc-3sA"/>
-                                </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Dependenices Check Failed" id="rrW-IT-VRs">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <imageView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hbV-50-ami">
-                                <rect key="frame" x="20" y="68" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="5oT-8F-0dR"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSCaution" id="m9y-eI-ggM"/>
-                            </imageView>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xpE-QO-Jb9">
-                                <rect key="frame" x="20" y="17" width="409" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="22e-9p-xcM">
-                                    <font key="font" metaFont="miniSystem"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="h6A-8Y-PGs" firstAttribute="centerX" secondItem="Ouq-Uo-hoi" secondAttribute="centerX" id="cVb-fZ-JKZ"/>
-                            <constraint firstItem="h6A-8Y-PGs" firstAttribute="centerY" secondItem="hbV-50-ami" secondAttribute="centerY" id="qUy-w5-3cp"/>
-                        </constraints>
-                    </view>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="-572" y="1327"/>
+            <point key="canvasLocation" x="975" y="643"/>
         </scene>
         <!--GitHub-->
         <scene sceneID="IJP-pH-3hn">
@@ -1176,7 +1104,6 @@ Step 5: Select where to store the folder on your own computer</string>
         </scene>
     </scenes>
     <resources>
-        <image name="NSCaution" width="32" height="32"/>
         <image name="folder" catalog="system" width="18" height="14"/>
     </resources>
 </document>
